@@ -31,6 +31,7 @@ jobs:
       - name: Run my action
         uses: ./
         with:
+          region: eu-north-1
           topic: test
           subject: test
           message: test
