@@ -6,11 +6,6 @@ import {
 } from "@aws-sdk/client-sns";
 import { fromEnv } from "@aws-sdk/credential-providers";
 
-const region = getInput("region", {
-  required: true,
-  trimWhitespace: true,
-});
-
 const topic = getInput("topic", {
   trimWhitespace: true,
 });
@@ -26,15 +21,9 @@ const message = getInput("message", {
 
 const client = new SNSClient({
   credentials: fromEnv(),
-  region,
 });
 
-const structure =
-  getInput("structure", {
-    required: true,
-  }) ?? "json";
-
-publishMessage(topic, message, structure, subject)
+publishMessage(topic, message, subject)
   .then((response) => {
     setOutput("message_id", response.MessageId);
   })
@@ -45,7 +34,6 @@ publishMessage(topic, message, structure, subject)
 function publishMessage(
   topic: string,
   message: string,
-  structure: string,
   subject?: string
 ): Promise<PublishCommandOutput> {
   return client.send(
@@ -53,7 +41,6 @@ function publishMessage(
       TopicArn: topic,
       Subject: subject,
       Message: message,
-      MessageStructure: structure,
     })
   );
 }
