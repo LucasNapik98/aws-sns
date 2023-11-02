@@ -1,0 +1,25 @@
+name: 'AWS SNS Publisher'
+author: 'Lucas Napik'
+description: 'Action to publish SNS messages'
+
+inputs:
+  topic:
+    description: The topic arn you would like to send to
+    required: true
+  subject:
+    description: Subject of the message
+    required: false
+  message:
+    description: The message to send
+    required: true
+  structure:
+    description: The type of the message example json
+    default: json
+    required: false
+outputs:
+  message_id:
+    description: The published message id
+
+runs:
+  using: "node20"
+  main: 'dist/index.js'
