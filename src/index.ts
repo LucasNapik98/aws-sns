@@ -26,10 +26,10 @@ const message = getInput("message", {
   required: true,
 });
 
-const client = new SNSClient({
-  credentials: fromEnv(),
-  region,
-});
+// const client = new SNSClient({
+//   credentials: fromEnv(),
+//   region,
+// });
 
 const structure =
   getInput("structure", {
