@@ -1,11 +1,12 @@
-import { getInput, setOutput, error, setFailed } from "@actions/core";
-import { context } from "@actions/github";
+import { getInput, setOutput, setFailed } from "@actions/core";
 import {
   SNSClient,
   PublishCommand,
   PublishCommandOutput,
 } from "@aws-sdk/client-sns";
 import { fromEnv } from "@aws-sdk/credential-providers";
+
+console.log(process.env);
 
 const region = getInput("region", {
   required: true,
@@ -29,8 +30,6 @@ const client = new SNSClient({
   credentials: fromEnv(),
   region,
 });
-
-console.log(process.env);
 
 const structure =
   getInput("structure", {
