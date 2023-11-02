@@ -3,6 +3,10 @@ author: 'Lucas Napik'
 description: 'Action to publish SNS messages'
 
 inputs:
+  region:
+    description: AWS region
+    default: eu-north-1
+    required: true
   topic:
     description: The topic arn you would like to send to
     required: true

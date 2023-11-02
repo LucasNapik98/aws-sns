@@ -4,14 +4,12 @@ import {
   SNSClient,
   PublishCommand,
   PublishCommandOutput,
-  SNSServiceException,
 } from "@aws-sdk/client-sns";
 import { fromEnv } from "@aws-sdk/credential-providers";
 
-type GithubContext = typeof context;
-
-const client = new SNSClient({
-  credentials: fromEnv(),
+const region = getInput("region", {
+  required: true,
+  trimWhitespace: true,
 });
 
 const topic = getInput("topic", {
@@ -26,6 +24,13 @@ const subject = getInput("subject", {
 const message = getInput("message", {
   required: true,
 });
+
+const client = new SNSClient({
+  credentials: fromEnv(),
+  region,
+});
+
+console.log(process.env);
 
 const structure =
   getInput("structure", {
